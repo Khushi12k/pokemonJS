@@ -1,11 +1,6 @@
-// let container=document.querySelector(".container")
-// let url='https://pokeapi.co/api/v2/pokemon?limit=20&offse
-
 let main=document.querySelector("main")
-let loadMoreButton=document.querySelector("footer button")
-let searchPokemon=document.querySelector("#sechByName")
-
 let url='https://pokeapi.co/api/v2/pokemon?limit=20&offset=0'
+let finalData=[]
 
 async function fetchUrl(urlToFeTCH){
     let response=await fetch(urlToFeTCH)
@@ -13,32 +8,41 @@ async function fetchUrl(urlToFeTCH){
     return result
 }
 // fetchUrl(url)
-
+window.addEventListener("load",async()=>{
+    const data= await fetchUrl(url)
+    // console.log(data)
+    displayData(await fetchAgain(data))
+})
 
 async function fetchAgain(data){
 const promises=[]
 for(let i=0; i<data.results.length;i++){
-    promises.push(fetchUrl(data.result[i].url))
+    promises.push(fetchUrl(data.results[i].url))
+}
+
+finalData.push(...(await Promise.all(promises)))
+return finalData
 }
 
 
-}
 
-window.addEventListener("load",async()=>{
-    const data= await fetchUrl(url)
-    console.log(data)
-    displayData(await fetchAgain(data))
-})
-
-function displayData(arr){
+async function displayData(arr){
     for(let i=0;i<arr.length; i++){
 let wrapper=document.createElement("div")
 wrapper.classList.add("wrapper")
 let heading=document.createElement("heading")
-heading.classList("heading")
-heading.textContent=arr[i].name
+heading.classList.add("heading")
+
+heading.innerText=arr[i].name
+// console.log(heading)
 main.append(wrapper)
 wrapper.append(heading)
+let image=document.createElement("img")
+image.classList.add("image")
+image.src=arr[i].sprites.other.dream_world.front_default;
+// console.log(image)
+wrapper.append(image)
+
     }
 }
 
