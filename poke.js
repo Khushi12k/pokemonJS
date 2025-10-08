@@ -1,44 +1,46 @@
-let container=document.querySelector(".container")
+// let container=document.querySelector(".container")
+// let url='https://pokeapi.co/api/v2/pokemon?limit=20&offse
+
+let main=document.querySelector("main")
+let loadMoreButton=document.querySelector("footer button")
+let searchPokemon=document.querySelector("#sechByName")
+
 let url='https://pokeapi.co/api/v2/pokemon?limit=20&offset=0'
 
-async function fetchurl(){
-    let response=await fetch(url)
+async function fetchUrl(urlToFeTCH){
+    let response=await fetch(urlToFeTCH)
     let result=await response.json()
-    console.log(result)
-     console.log(result.results)
-
-     let arr=result.results
-     for (let i=0; i<arr.length; i++){
-      
-
-        let test= result.results[i].url
-        let pokemonimage= await fetch(test)
-        let data =await pokemonimage.json()
-        console.log(data);
-        let storeImg=data.sprites.other.dream_world.front_default
-        console.log(storeImg)
-        
-
-          let card=document.createElement("div")
-        card.classList.add("card")
-         let nameText=document.createElement("div")
-        nameText.innerText=arr[i].name
-        nameText.classList.add("heading")
-        card.append(nameText)
-        // nameText.style.textAlign='center'
-
-
-        let image=document.createElement("img")
-        image.classList.add("image")
-        image.src=storeImg
-        // container.append(image)
-         card.append(image)
-       container.append(card)
-
-       
-
-     }
-     
-   
+    return result
 }
-fetchurl()
+// fetchUrl(url)
+
+
+async function fetchAgain(data){
+const promises=[]
+for(let i=0; i<data.results.length;i++){
+    promises.push(fetchUrl(data.result[i].url))
+}
+
+finalData.push(promises.all((promises)))
+return finalData
+}
+
+window.addEventListener("load",async()=>{
+    const data= await fetchUrl(url)
+    console.log(data)
+    displayData(await fetchAgain(data))
+})
+
+function displayData(arr){
+    for(let i=0;i<arr.length; i++){
+let wrapper=document.createElement("div")
+wrapper.classList.add("wrapper")
+let heading=document.createElement("heading")
+heading.classList("heading")
+heading.textContent=arr[i].name
+main.append(wrapper)
+wrapper.append(heading)
+    }
+}
+displayData()
+
