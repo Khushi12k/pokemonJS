@@ -21,8 +21,7 @@ for(let i=0; i<data.results.length;i++){
     promises.push(fetchUrl(data.result[i].url))
 }
 
-finalData.push(promises.all((promises)))
-return finalData
+
 }
 
 window.addEventListener("load",async()=>{
@@ -42,5 +41,5 @@ main.append(wrapper)
 wrapper.append(heading)
     }
 }
-displayData()
+
 
