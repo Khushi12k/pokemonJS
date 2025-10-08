@@ -9,9 +9,7 @@ async function fetchurl(){
 
      let arr=result.results
      for (let i=0; i<arr.length; i++){
-        let nameText=document.createElement("div")
-        nameText.innerText=arr[i].name
-        container.append(nameText)
+      
 
         let test= result.results[i].url
         let pokemonimage= await fetch(test)
@@ -21,23 +19,26 @@ async function fetchurl(){
         console.log(storeImg)
         
 
+          let card=document.createElement("div")
+        card.classList.add("card")
+         let nameText=document.createElement("div")
+        nameText.innerText=arr[i].name
+        nameText.classList.add("heading")
+        card.append(nameText)
+        // nameText.style.textAlign='center'
+
+
         let image=document.createElement("img")
-        
         image.classList.add("image")
         image.src=storeImg
-        container.append(image)
+        // container.append(image)
+         card.append(image)
+       container.append(card)
 
-        // let div=document.createElement("div");
-        // div.innerText=results[i].url;
+       
 
      }
      
-    // let test= result.results[0].url
-    // let pokemonimage= await fetch(test)
-    // let data =await pokemonimage.json()
-    // let image=data.sprites.back_default;
-
-    console.log(pokemonimage)
-    console.log(data)
+   
 }
 fetchurl()
