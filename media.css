@@ -1,0 +1,6 @@
+@media (max-width: 475px) {
+    .wrapper {
+        height: unset;
+        width: unset;
+    }
+}
