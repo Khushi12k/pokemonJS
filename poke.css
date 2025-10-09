@@ -107,6 +107,26 @@ button:hover {
   color: black;
   font-weight: bold;
 }
+@media(max-width:1024px){
+header{
+  width: 100%;
+  flex-direction: column;
+}
+}
+@media(max-width:720px){
+header{
+  width: 100%;
+  flex-direction: column;
+}
+.wrapper{
+  width: 100%;
+  flex-direction: column;
+}
+.image{
+  width: 100%;
+  
+}
+}
 
 
 
