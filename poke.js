@@ -97,8 +97,13 @@ pokTypes.addEventListener("change", function(e){
             const categery=last.types[0].type.name
             return categery.includes(e.target.value)
         })
+         if(pokemonName.length===0){
+        main.innerHTML=`<div class="error">Error:No Pokemon Found.</div>`
+        return
+    }
         displayData(pokemonName)
     }
+   
 })
 
 
